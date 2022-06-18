@@ -108,7 +108,7 @@ int main(void)
 				i++;
 			}
 			fclose(fp);
-			printf("파일 오픈 성공!(2)\n");
+			printf("파일 오픈 성공!(%d)\n",count);
 		}
 
 		if (input == 6)  //종료
