@@ -1,0 +1,53 @@
+#include <iostream>
+#include <cstring>
+#include <windows.h>
+using namespace std;
+
+typedef unsigned char byte;
+
+int main()
+{
+	byte S[256]; //배열 S는 초기화 과정에서 0부터 255까지의 값을 담음
+	byte K[256];  //배열 K는 자신의 길이와 modula 연산을 통해 S의 내용값을 뒤섞음
+	byte key_Streambyte;
+	//Key_Streambyte는 key값으로 섞인 배열 S에서 평문과 암호화할 바이트 하나 선택
+
+	int i, j = 0, t;
+	int counter = 0;
+
+	char key[] = "Gidan";  //키 값과 바이트 단위로 암호화할 평문
+	char plainText[] = "Swing";
+
+	//초기화 과정: 256단계의 반복을 통해 S에 순열 대입
+	for (i = 0;i < 256;i++) {
+		S[i] = i;
+		K[i] = key[i % strlen(key)];
+	}
+	//0에서 255까지의 값이 정렬된 S에 K와 swap()함수를 통해 셔플링
+	for (i = 0;i < 256;i++) {
+		j = (j + S[i] + K[i]) % 256;
+		swap(S[i], S[j]);
+	}
+	i = j = 0;
+
+	cout << "현재 키 값: " << key << endl;  //현재 키 값 출력
+
+	//평문의 바이트 길이만큼 암호화가 반복적으로 이루어짐
+	for (counter = 0;counter < strlen(plainText);counter++) {
+		i = (i + 1) % 256;
+		j = (j + S[i]) % 256;
+		swap(S[i], S[j]);
+
+		t = (S[i] + S[j]) % 256;
+		key_Streambyte = S[t];
+
+		plainText[counter] ^= S[key_Streambyte];  //암호화
+		//plainText[counter] ^= S[key_Streambyte];  //복호화
+
+		cout << (counter + 1) << "번째 key_Streambyte: ";  //평문의 한 바이트마다
+		cout << (unsigned int)key_Streambyte << endl;  //key_Streambyte의 값을 확인
+	}
+	cout << endl << "암호화 된 plainText: "
+		<< plainText << endl;  //암호화할 때마다 매번 복호화해서 평문이 그대로 출력
+	exit(0);
+}
