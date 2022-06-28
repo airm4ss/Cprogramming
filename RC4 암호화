@@ -16,7 +16,7 @@ int main()
 	int counter = 0;
 
 	char key[] = "Gidan";  //키 값과 바이트 단위로 암호화할 평문
-	char plainText[] = "Swing";
+	char plainText[] = "SWING";
 
 	//초기화 과정: 256단계의 반복을 통해 S에 순열 대입
 	for (i = 0;i < 256;i++) {
@@ -42,7 +42,7 @@ int main()
 		key_Streambyte = S[t];
 
 		plainText[counter] ^= S[key_Streambyte];  //암호화
-		//plainText[counter] ^= S[key_Streambyte];  //복호화
+		plainText[counter] ^= S[key_Streambyte];  //복호화
 
 		cout << (counter + 1) << "번째 key_Streambyte: ";  //평문의 한 바이트마다
 		cout << (unsigned int)key_Streambyte << endl;  //key_Streambyte의 값을 확인
