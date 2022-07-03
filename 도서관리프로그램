@@ -9,39 +9,39 @@ int main(void)
 	int i, input, count = 0;
 	char name[30], author[30], pub[30], search[30];
 
-	char menu[6][10] = { "ÆÄÀÏ ÀĞ±â", "Ãß°¡","Ãâ·Â","°Ë»ö","ÆÄÀÏ ¾²±â","Á¾·á" };
+	char menu[6][10] = { "íŒŒì¼ ì½ê¸°", "ì¶”ê°€","ì¶œë ¥","ê²€ìƒ‰","íŒŒì¼ ì“°ê¸°","ì¢…ë£Œ" };
 	char lib[BOOKS][3][30];
 
-	while (1)  //ÀÔ·Â ¹ŞÀº Á¤¼ö °ªÀÌ 6(Á¾·á)ÀÌ ¾Æ´Ñ ÀÌ»ó ¹«ÇÑ·çÇÁ
+	while (1)  //ì…ë ¥ ë°›ì€ ì •ìˆ˜ ê°’ì´ 6(ì¢…ë£Œ)ì´ ì•„ë‹Œ ì´ìƒ ë¬´í•œë£¨í”„
 	{
-		printf("===============\n");  //ÃÊ±â¸Ş´ºÈ­¸é
+		printf("===============\n");  //ì´ˆê¸°ë©”ë‰´í™”ë©´
 		for (i = 0;i < 6;i++)
 		{
 			printf("%d. %s\n", i + 1, menu[i]);
 		}
 		printf("===============\n");
-		printf("Á¤¼ö°ªÀ» ÀÔ·ÂÇÏ½Ã¿À: ");
+		printf("ì •ìˆ˜ê°’ì„ ì…ë ¥í•˜ì‹œì˜¤: ");
 		scanf("%d", &input);
 
-		if (input == 1)  //ÆÄÀÏ ÀĞ±â
+		if (input == 1)  //íŒŒì¼ ì½ê¸°
 		{
 			if ((fp = fopen("book.txt", "r")) == NULL)
 			{
-				fprintf(stderr, "Ã¥ ÆÄÀÏÀ» ¿­ ¼ö ¾ø½À´Ï´Ù.\n");
+				fprintf(stderr, "ì±… íŒŒì¼ì„ ì—´ ìˆ˜ ì—†ìŠµë‹ˆë‹¤.\n");
 				exit(1);
 			}
 			else
-				printf("ÆÄÀÏ ¿ÀÇÂ ¼º°ø!\n");
+				printf("íŒŒì¼ ì˜¤í”ˆ ì„±ê³µ!\n");
 
 		}
 
-		if (input == 2)  //Ãß°¡
+		if (input == 2)  //ì¶”ê°€
 		{
-			printf("\nµµ¼­ÀÇ ÀÌ¸§: ");
+			printf("\në„ì„œì˜ ì´ë¦„: ");
 			scanf("%s", &name);
-			printf("ÀúÀÚ: ");
+			printf("ì €ì: ");
 			scanf("%s", author);
-			printf("ÃâÆÇ»ç: ");
+			printf("ì¶œíŒì‚¬: ");
 			scanf("%s", &pub);
 			printf("\n");
 
@@ -54,29 +54,29 @@ int main(void)
 			count++;
 		}
 
-		if (input == 3)  //Ãâ·Â
+		if (input == 3)  //ì¶œë ¥
 		{
 			if ((fp = fopen("book.txt", "r")) == NULL)
 			{
-				fprintf(stderr, "Ã¥ ÆÄÀÏÀ» ¿­ ¼ö ¾ø½À´Ï´Ù.\n");
+				fprintf(stderr, "ì±… íŒŒì¼ì„ ì—´ ìˆ˜ ì—†ìŠµë‹ˆë‹¤.\n");
 				exit(1);
 			}
 			while (!feof(fp))
 			{
 				fscanf(fp, "%s %s %s", name, author, pub);
-				printf("Á¦¸ñ: %s\nÀúÀÚ: %s\nÃâÆÇ»ç: %s\n", name, author, pub);
+				printf("ì œëª©: %s\nì €ì: %s\nì¶œíŒì‚¬: %s\n", name, author, pub);
 			}
 			fclose(fp);
 		}
 
-		if (input == 4)  //°Ë»ö
+		if (input == 4)  //ê²€ìƒ‰
 		{
-			printf("Á¦¸ñ: ");
+			printf("ì œëª©: ");
 			scanf("%s", search);
 
 			if ((fp = fopen("book.txt", "r")) == NULL)
 			{
-				fprintf(stderr, "Ã¥ ÆÄÀÏÀ» ¿­ ¼ö ¾ø½À´Ï´Ù.\n");
+				fprintf(stderr, "ì±… íŒŒì¼ì„ ì—´ ìˆ˜ ì—†ìŠµë‹ˆë‹¤.\n");
 				exit(1);
 			}
 			while (!feof(fp))
@@ -84,19 +84,19 @@ int main(void)
 				fscanf(fp, "%s %s %s", name, author, pub);
 				if (strcmp(name, search) == 0)
 				{
-					printf("ÃâÆÇ»ç´Â %s\n", pub);
+					printf("ì¶œíŒì‚¬ëŠ” %s\n", pub);
 				}
 			}
 			fclose(fp);
 		}
 
-		if (input == 5)  //ÆÄÀÏ ¾²±â
+		if (input == 5)  //íŒŒì¼ ì“°ê¸°
 		{
 			i = 0;
 			fp = fopen("book.txt", "a");
 			if (fp == NULL)
 			{
-				printf("Ã¥ ¸ñ·ÏÀ» ¿­ ¼ö ¾ø½À´Ï´Ù.\n");
+				printf("ì±… ëª©ë¡ì„ ì—´ ìˆ˜ ì—†ìŠµë‹ˆë‹¤.\n");
 				exit(0);
 			}
 
@@ -104,14 +104,14 @@ int main(void)
 			{
 				if (i == count)
 					break;
-				fprintf(fp, " %s %s %s", lib[i][0], lib[i][1], lib[i][2]);  //book.txt ÆÄÀÏ¿¡ ±â·Ï
+				fprintf(fp, " %s %s %s", lib[i][0], lib[i][1], lib[i][2]);  //book.txt íŒŒì¼ì— ê¸°ë¡
 				i++;
 			}
 			fclose(fp);
-			printf("ÆÄÀÏ ¿ÀÇÂ ¼º°ø!(%d)\n",count);
+			printf("íŒŒì¼ ì˜¤í”ˆ ì„±ê³µ!(%d)\n",count);
 		}
 
-		if (input == 6)  //Á¾·á
+		if (input == 6)  //ì¢…ë£Œ
 			break;
 	}
 	return 0;
